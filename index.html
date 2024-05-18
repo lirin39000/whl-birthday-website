@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>吴杭璐的生日网站</title>
+    <style>
+        body {
+            font-family: 'Arial, sans-serif';
+            background-color: #f9f9f9;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #ffcccb;
+            padding: 20px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .footer {
+            background-color: #ffcccb;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .countdown {
+            font-size: 2em;
+            color: #ff5733;
+        }
+        .message-board {
+            margin-top: 20px;
+        }
+        .message {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>庆祝吴杭璐的生日！</h1>
+    </div>
+    <div class="content">
+        <h2>生日倒计时</h2>
+        <div class="countdown" id="countdown"></div>
+        <h2>给吴杭璐的生日祝福</h2>
+        <div class="message-board" id="message-board"></div>
+    </div>
+    <div class="footer">
+        &copy; 2024 吴杭璐的朋友们
+    </div>
+    <script>
+        // 倒计时功能
+        const targetDate = new Date('June 3, 2024 00:00:00').getTime();
+        const countdownElement = document.getElementById('countdown');
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = `${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownElement.innerHTML = "生日快乐，吴杭璐！";
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        // 留言板功能
+        const messages = [
+            "生日快乐，吴杭璐！希望你度过一个美好的一天！",
+            "祝你生日快乐，愿你的每一天都充满幸福与惊喜！",
+            "生日快乐，杭璐！愿你的未来充满光明和希望！"
+        ];
+        const messageBoard = document.getElementById('message-board');
+
+        messages.forEach(message => {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message';
+            messageElement.textContent = message;
+            messageBoard.appendChild(messageElement);
+        });
+    </script>
+</body>
+</html>
